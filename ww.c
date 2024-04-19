@@ -15,7 +15,7 @@ int getbar(){ // get barrier of terminal
   return w.ws_col;
 }
 
-int main(){
+int main(/*int argc, char **argv*/){
   int used = 0;
   int c;
   int bs = 16;
@@ -31,7 +31,7 @@ int main(){
   while(1){
     if(c == ' ' || c == '\n' || c == EOF){
       // end of word
-      if(used > getbar()){ 
+      if(used >= getbar()){ 
         // if used more than available
         // make a newline and print block
         // there
@@ -40,6 +40,8 @@ int main(){
       } else {
         // otherwise just print it normally
         printf("%s ", block);
+        used++;
+        
       }
 
       // reset buffer ctr and zero buffer
@@ -63,7 +65,7 @@ int main(){
     // for strncat
     char s[2] = { c, '\0' };
 
-    if (bused <= bs){
+    if (bused >= bs){
       // prefent buffer overflow
       // by reallocating in 16 byte
       // increments each time buffer
@@ -82,8 +84,9 @@ int main(){
         // in memory, free old one to
         // prevent data leaks
         free(block);
-        block = tmp;
       }
+
+      block = tmp;
 
     }
     

@@ -17,13 +17,13 @@ int getbar(){ // get barrier of terminal
 
 int main(){
   int used = 0;
-  int c = '\0';
+  int c;
   int bs = 16;
   int bused = 0;
   char* block = calloc(sizeof(char), bs);
   if (block == NULL){
-    // calloc call faila
-    perror("block");
+    // calloc call fail
+    perror("calloc");
     return 1;
   }
   
@@ -69,7 +69,7 @@ int main(){
       // increments each time buffer
       // runs out of space
       bs += 16;
-      char *tmp = realloc(block, 16);
+      char *tmp = realloc(block, bs);
       if (tmp == NULL){
         // if realloc fails
         free(block);

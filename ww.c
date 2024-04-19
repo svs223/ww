@@ -69,7 +69,7 @@ int main(){
       // increments each time buffer
       // runs out of space
       bs += 16;
-      char *tmp = realloc(block, bs);
+      char *tmp = realloc(block, bs * sizeof(char));
       if (tmp == NULL){
         // if realloc fails
         free(block);
